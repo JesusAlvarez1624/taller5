@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MilkLab Street — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF6F0;
+    --pink: #F2A7B0;
+    --rose: #E05C78;
+    --deep: #C23B5A;
+    --berry: #7C3055;
+    --peach: #F5B88A;
+    --cream: #FFFCF7;
+    --dark: #1E0E14;
+    --muted: #A07080;
+    --gold: #E8A045;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(242,167,176,0.18) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob-1 { width: 500px; height: 500px; top: -120px; right: -100px; background: rgba(242,167,176,0.28); }
+  .blob-2 { width: 400px; height: 400px; bottom: -80px; left: -80px; background: rgba(245,184,138,0.22); }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ─── HERO HEADER ─── */
+  .hero {
+    background: linear-gradient(145deg, var(--deep) 0%, var(--berry) 100%);
+    border-radius: 0 0 40px 40px;
+    padding: 52px 36px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(194,59,90,0.3);
+    animation: slideDown 0.7s cubic-bezier(.22,1,.36,1) both;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.06)'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+
+  .truck-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-family: 'Space Mono', monospace;
+    animation: fadeIn 0.5s 0.3s both;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(46px, 11vw, 82px);
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    margin-bottom: 6px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--peach);
+  }
+
+  .hero-slogan {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    max-width: 220px;
+  }
+  .hero-divider span { flex:1; height:1px; background: rgba(255,255,255,0.2); }
+  .hero-divider i { font-style: normal; font-size: 14px; }
+
+  /* ─── SECTION ─── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .section-title h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--berry);
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--pink), transparent);
+  }
+
+  /* ─── PRODUCT CARD ─── */
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    border: 1.5px solid rgba(242,167,176,0.3);
+    box-shadow: 0 4px 20px rgba(194,59,90,0.07);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    animation: fadeUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(194,59,90,0.14);
+  }
+
+  .card-stripe {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--stripe, var(--rose));
+    border-radius: 20px 0 0 20px;
+  }
+
+  .card-emoji {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    background: var(--icon-bg, #fde8ee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  .card-info { flex: 1; }
+
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--dark);
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 9.5px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+    color: #fff;
+    background: var(--stripe, var(--rose));
+  }
+
+  .card-price-block {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price-main {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--stripe, var(--deep));
+    line-height: 1;
+  }
+
+  .price-unit {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* FEATURED */
+  .card-featured {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--berry) 100%);
+    border: none;
+    box-shadow: 0 8px 32px rgba(194,59,90,0.3);
+  }
+  .card-featured .card-name { color: #fff; }
+  .card-featured .card-desc { color: rgba(255,255,255,0.7); }
+  .card-featured .price-main { color: var(--peach); }
+  .card-featured .price-unit { color: rgba(255,255,255,0.55); }
+
+  /* per-product accent colors */
+  .p-cheese  { --stripe: #D4A020; --icon-bg: #fff7e0; }
+  .p-quesad  { --stripe: #C23B5A; --icon-bg: #fde8ed; }
+  .p-straw   { --stripe: #E8365D; --icon-bg: #fde0e6; }
+  .p-peach   { --stripe: #E0894A; --icon-bg: #fef0e4; }
+  .p-berry   { --stripe: #7C3055; --icon-bg: #f5e6f0; }
+
+  /* ─── BOTTOM NOTE ─── */
+  .bottom-note {
+    text-align: center;
+    margin-top: 50px;
+    animation: fadeUp 0.5s 0.5s ease both;
+  }
+  .bottom-note p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 340px;
+    margin: 0 auto 16px;
+  }
+  .bottom-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--pink);
+    letter-spacing: -0.5px;
+  }
+  .bottom-brand em { font-style: italic; color: var(--rose); }
+
+  /* ─── KEYFRAMES ─── */
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.13s; }
+  .card:nth-child(3) { animation-delay: 0.21s; }
+  .card:nth-child(4) { animation-delay: 0.29s; }
+  .card:nth-child(5) { animation-delay: 0.37s; }
+
+  .mt-section { margin-top: 36px; }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="truck-badge">🚚 Food Truck</div>
+    <h1 class="hero-name">MilkLab<br><em>Street</em></h1>
+    <p class="hero-slogan">"Where Every Bite Tastes Like Home."</p>
+    <div class="hero-divider"><span></span><i>🥛</i><span></span></div>
+  </header>
+
+  <!-- ── DAIRY CLASSICS ── -->
+  <div class="section-title"><h2>🧀 Dairy Classics</h2></div>
+
+  <div class="card p-cheese">
+    <div class="card-stripe"></div>
+    <div class="card-emoji">🧀</div>
+    <div class="card-info">
+      <div class="card-name">Fresh Cheese</div>
+      <div class="card-desc">Handcrafted whole-milk cheese — soft, creamy and full of flavor</div>
+      <span class="pill">House Specialty</span>
+    </div>
+    <div class="card-price-block">
+      <div class="price-main">$12,000</div>
+      <div class="price-unit">per pound</div>
+    </div>
+  </div>
+
+  <div class="card p-quesad">
+    <div class="card-stripe"></div>
+    <div class="card-emoji">🫓</div>
+    <div class="card-info">
+      <div class="card-name">Quesadillo</div>
+      <div class="card-desc">Traditional cheese pastry, freshly baked with a hint of vanilla</div>
+      <span class="pill">Traditional</span>
+    </div>
+    <div class="card-price-block">
+      <div class="price-main">$3,000</div>
+      <div class="price-unit">per unit</div>
+    </div>
+  </div>
+
+  <!-- ── FRESH YOGURTS ── -->
+  <div class="section-title mt-section"><h2>🥛 Fresh Yogurts</h2></div>
+
+  <!-- STRAWBERRY = FEATURED -->
+  <div class="card p-straw card-featured">
+    <div class="card-stripe"></div>
+    <div class="card-emoji" style="background:rgba(255,255,255,0.15);">🍓</div>
+    <div class="card-info">
+      <div class="card-name">Strawberry Yogurt</div>
+      <div class="card-desc">Creamy yogurt blended with ripe strawberries — refreshing and easy to enjoy anywhere</div>
+      <span class="pill">⭐ Best Seller</span>
+    </div>
+    <div class="card-price-block">
+      <div class="price-main">$3,000</div>
+      <div class="price-unit">per serving</div>
+    </div>
+  </div>
+
+  <div class="card p-peach">
+    <div class="card-stripe"></div>
+    <div class="card-emoji">🍑</div>
+    <div class="card-info">
+      <div class="card-name">Peach Yogurt</div>
+      <div class="card-desc">Natural peach pulp in a smooth, aromatic and balanced yogurt</div>
+      <span class="pill">Seasonal</span>
+    </div>
+    <div class="card-price-block">
+      <div class="price-main">$3,000</div>
+      <div class="price-unit">per serving</div>
+    </div>
+  </div>
+
+  <div class="card p-berry">
+    <div class="card-stripe"></div>
+    <div class="card-emoji">🫐</div>
+    <div class="card-info">
+      <div class="card-name">Blackberry Yogurt</div>
+      <div class="card-desc">Wild blackberries, deeply aromatic, in a rich and silky yogurt</div>
+      <span class="pill">Antioxidant</span>
+    </div>
+    <div class="card-price-block">
+      <div class="price-main">$3,000</div>
+      <div class="price-unit">per serving</div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="bottom-note">
+    <p>"Fresh from the lab,<br>straight to your heart."</p>
+    <div class="bottom-brand">MilkLab <em>Street</em></div>
+  </div>
+
+</div>
+</body>
+</html>
